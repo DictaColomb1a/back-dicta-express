@@ -1,15 +1,19 @@
 {
-
+  "name": "back-express",
+  "version": "1.0.0",
+  "description": "Primera version de api",
+  "main": "index.js",
   "scripts": {
-
     "dev": "nodemon index.js",
-
     "start": "node index.js",
-
     "test": "echo \"Error: no test specified\" && exit 1"
-
   },
 
+  "author": "Harry Ore Lara",
+  "license": "ISC",
+  "engines": {
+    "node": ">=14.20.1"
+  },
   "dependencies": {
 
     "bcryptjs": "^2.4.3",
