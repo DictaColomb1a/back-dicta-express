@@ -17,6 +17,31 @@ const mostrarCurso =  async (req, res)=>{//aprobado
     }
 };
 
+const buscarCursoNombre = async (req, res) => {
+    const { nombre } = req.params;
+
+    try {
+        const curso = await Curso.findOne({ nombre });
+
+        if (!curso) {
+            return res.status(404).json({
+                ok: false,
+                msg: "Curso no encontrado",
+            });
+        }
+
+        return res.json({
+            ok: true,
+            curso,
+        });
+    } catch (error) {
+        return res.status(500).json({
+            ok: false,
+            msg: "Error al buscar el curso ",
+        });
+    }
+};
+
 const mostrarCursosColaboradores = async (req, res) => {
     try {
         const categoria = "colaboradores"; // Cambia "colaboradores" a la categoría deseada
@@ -53,7 +78,7 @@ const mostrarCursosDirectivos = async (req, res) => {
 
 const crearCurso =  async (req, res)=>{//aprobado
     const id = req.uid;
-    const {nombre, fechaPublicacion,categoria,precio} = req.body;
+    const {nombre, fechaPublicacion, imagencurso, categoria, estado, nombreCreador, precio, secciones} = req.body;
 
     try {
         let curso = await Curso.findOne({nombre});
@@ -65,7 +90,7 @@ const crearCurso =  async (req, res)=>{//aprobado
             });
         }
 
-        const nuevoCurso = new Curso({nombre, fechaPublicacion,categoria,precio, creador:id});
+        const nuevoCurso = new Curso({nombre, fechaPublicacion, imagencurso, categoria, estado, nombreCreador, precio, secciones,});
         await nuevoCurso.save();
         res.status(200).json({
             ok:true,
@@ -83,9 +108,9 @@ const crearCurso =  async (req, res)=>{//aprobado
 
 const actualizarCurso =  async (req, res)=>{//aprobado
     const {id} = req.params;
-    const {nombre, fechaPublicacion,categoria,precio} = req.body;
+    const {nombre, fechaPublicacion, imagencurso, categoria, estado, nombreCreador, precio} = req.body;
     try {
-        const curso = await Curso.findByIdAndUpdate(id, {nombre, fechaPublicacion,categoria,precio}, {new: true});
+        const curso = await Curso.findByIdAndUpdate(id, {nombre, fechaPublicacion, imagencurso, categoria, estado, nombreCreador, precio, secciones}, {new: true});
         return res.json({
             ok: true,
             msg:"curso actualizado",
@@ -120,5 +145,5 @@ const eliminarCurso =  async (req, res)=>{//aprobado
 };
 
 module.exports = {
-    mostrarCurso, crearCurso, actualizarCurso, eliminarCurso, mostrarCursosColaboradores, mostrarCursosDirectivos
+    mostrarCurso, buscarCursoNombre, crearCurso, actualizarCurso, eliminarCurso, mostrarCursosColaboradores, mostrarCursosDirectivos
 }

@@ -50,13 +50,19 @@ const blog = new Schema({
     categoriaBlog:{
         type:String,
         required: true,
+        enum: ['niños', 'jovenes', 'adultos'],
         trim: true
     },
-
-    creator:{
-        type: Schema.Types.ObjectId,
-        trim: true,
-        ref: "Trabajador"
+    estado: {
+            type: String,
+            required: true,
+            enum: ['activo', 'inactivo'],
+            trim: true,
+    },
+    nombreCreadorBlog:{
+        type:String,
+        required:true,
+        trim:true
     },
     createdAt:{
         type: Date,

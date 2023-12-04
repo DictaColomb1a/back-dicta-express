@@ -14,6 +14,8 @@ const crearBlog = async(req, res ) =>{
         img3,
         img4,
         categoriaBlog,
+        estado,
+        nombreCreadorBlog,
         
     } = req.body;
     const id = req.uid;
@@ -38,6 +40,8 @@ const crearBlog = async(req, res ) =>{
             img3,
             img4,
             categoriaBlog,
+            estado,
+            nombreCreadorBlog,
         });
         await newBlog.save();
         res.status(200).json({
@@ -69,6 +73,30 @@ const mostrarBlog = async (req, res) => {
       });
     }
   };
+  const buscarBlogNombre = async (req, res) => {
+    const { nombre } = req.params;
+
+    try {
+        const blog = await Blog.findOne({ titulo: nombre });
+
+        if (!blog) {
+            return res.status(404).json({
+                ok: false,
+                msg: "Blog no encontrado",
+            });
+        }
+
+        return res.json({
+            ok: true,
+            blog,
+        });
+    } catch (error) {
+        return res.status(500).json({
+            ok: false,
+            msg: "Error al buscar el blog por nombre",
+        });
+    }
+};
 
   const mostrarBlogNinos = async (req, res) => {
     try {
@@ -136,6 +164,8 @@ const mostrarBlogAdultos = async (req, res) => {
         img3,
         img4,
         categoriaBlog,
+        estado,
+        nombreCreadorBlog,
      } = req.body;
   
     try {
@@ -152,7 +182,10 @@ const mostrarBlogAdultos = async (req, res) => {
             img2,
             img3,
             img4,
-            categoriaBlog},
+            categoriaBlog,
+            estado,
+            nombreCreadorBlog,
+          },
         { new: true }
       );
       return res.json({
@@ -187,4 +220,4 @@ const mostrarBlogAdultos = async (req, res) => {
     }
   };
 
-module.exports = {crearBlog, mostrarBlog, actualizarBlog, eliminarBlog, mostrarBlogAdultos, mostrarBlogJovenes, mostrarBlogNinos}
+module.exports = {crearBlog, mostrarBlog, buscarBlogNombre, actualizarBlog, eliminarBlog, mostrarBlogAdultos, mostrarBlogJovenes, mostrarBlogNinos}

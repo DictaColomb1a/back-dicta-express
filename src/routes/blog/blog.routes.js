@@ -1,11 +1,12 @@
 const{Router} = require("express");
 const{check} = require("express-validator")
 
-const { crearBlog, mostrarBlog, actualizarBlog, eliminarBlog, mostrarBlogAdultos, mostrarBlogJovenes, mostrarBlogNinos} = require("../../controllers/blog/blog.controller")
+const { crearBlog, mostrarBlog, buscarBlogNombre, actualizarBlog, eliminarBlog, mostrarBlogAdultos, mostrarBlogJovenes, mostrarBlogNinos} = require("../../controllers/blog/blog.controller")
 
 const blogRouter = Router();
 
 blogRouter.get("/readAll", [], mostrarBlog);
+blogRouter.get("/search/:nombre", [], buscarBlogNombre);
 blogRouter.get("/ninos", [], mostrarBlogNinos);
 blogRouter.get("/jovenes", [], mostrarBlogJovenes );
 blogRouter.get("/adultos", [], mostrarBlogAdultos);
