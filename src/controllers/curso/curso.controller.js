@@ -65,10 +65,9 @@ const mostrarCursosDirectivos = async (req, res) => {
         const categoria = "directivos"; // Cambia "directivos" a la categoría deseada
         const curso = await Curso.find({ categoria }).sort({ createdAt: -1 });
 
-        return res.json({
-            ok: true,
-            curso,
-        });
+        return res.json(
+            curso
+            );
     } catch (error) {
         return res.status(404).json({
             ok: false,
