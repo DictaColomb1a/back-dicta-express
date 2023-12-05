@@ -30,10 +30,9 @@ const buscarCursoNombre = async (req, res) => {
             });
         }
 
-        return res.json({
-            ok: true,
-            curso,
-        });
+        return res.json(
+            curso
+        );
     } catch (error) {
         return res.status(500).json({
             ok: false,
