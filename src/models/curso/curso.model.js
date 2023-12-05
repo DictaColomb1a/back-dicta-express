@@ -27,6 +27,11 @@ const curso = new Schema({
         required: true,
     },
 
+    descripcion:{
+        type: String,
+        required: true
+    },
+
     fechaPublicacion:{
         type: Date,
         required: true,
@@ -38,11 +43,26 @@ const curso = new Schema({
         trim: true
     },
 
+    nivel:{
+        type: String,
+        required: true
+    },
+
     categoria:{
         type: String,
         required: true,
         enum: ['directivos', 'colaboradores'],
         trim: true,
+    },
+    subcategoria:{
+        type: String,
+        required:  true,
+        trim: true
+    },
+    idioma:{
+        type: String,
+        required:true,
+        trim: true
     },
     estado: {
             type: String,
@@ -60,10 +80,6 @@ const curso = new Schema({
         required:true,
     },
     secciones: [secciones],
-    createdAt:{
-        type: Date,
-        default: Date.now(),
-    },
 
 });
 

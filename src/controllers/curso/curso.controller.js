@@ -79,7 +79,7 @@ const mostrarCursosDirectivos = async (req, res) => {
 
 const crearCurso =  async (req, res)=>{//aprobado
     const id = req.uid;
-    const {nombre, fechaPublicacion, imagencurso, categoria, estado, nombreCreador, precio, secciones} = req.body;
+    const {nombre, descripcion, fechaPublicacion, imagencurso, nivel, categoria, subcategoria, idioma, estado, nombreCreador, precio, secciones } = req.body;
 
     try {
         let curso = await Curso.findOne({nombre});
@@ -91,7 +91,7 @@ const crearCurso =  async (req, res)=>{//aprobado
             });
         }
 
-        const nuevoCurso = new Curso({nombre, fechaPublicacion, imagencurso, categoria, estado, nombreCreador, precio, secciones,});
+        const nuevoCurso = new Curso({nombre, descripcion, fechaPublicacion, imagencurso, nivel, categoria, subcategoria, idioma, estado, nombreCreador, precio, secciones});
         await nuevoCurso.save();
         res.status(200).json({
             ok:true,
@@ -109,9 +109,9 @@ const crearCurso =  async (req, res)=>{//aprobado
 
 const actualizarCurso =  async (req, res)=>{//aprobado
     const {id} = req.params;
-    const {nombre, fechaPublicacion, imagencurso, categoria, estado, nombreCreador, precio} = req.body;
+    const {nombre, descripcion, fechaPublicacion, imagencurso, nivel, categoria, subcategoria, idioma, estado, nombreCreador, precio, secciones} = req.body;
     try {
-        const curso = await Curso.findByIdAndUpdate(id, {nombre, fechaPublicacion, imagencurso, categoria, estado, nombreCreador, precio, secciones}, {new: true});
+        const curso = await Curso.findByIdAndUpdate(id, {nombre, descripcion, fechaPublicacion, imagencurso, nivel, categoria, subcategoria, idioma, estado, nombreCreador, precio, secciones}, {new: true});
         return res.json({
             ok: true,
             msg:"curso actualizado",
