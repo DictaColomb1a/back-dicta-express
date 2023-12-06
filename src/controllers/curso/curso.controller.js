@@ -5,10 +5,9 @@ const mostrarCurso =  async (req, res)=>{//aprobado
     try {
         const curso = await Curso.find().sort({createdAt: -1});
 
-        return res.json({
-            ok: true,
+        return res.json(
             curso
-        });
+        );
     } catch (error) {
         return res.status(404).json({
             ok: false,
