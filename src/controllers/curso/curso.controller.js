@@ -1,4 +1,3 @@
-const { validateCursoFields } = require('../../middleware/middleware');
 const Curso = require("../../models/curso/curso.model");
 
 

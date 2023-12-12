@@ -1,6 +1,5 @@
 const{Router} = require("express");
 const{check} = require("express-validator");
-const { validateCursoFields } = require("../../middleware/middleware");
 
 const { mostrarCurso, buscarCursoNombre, crearCurso, actualizarCurso, eliminarCurso, mostrarCursosColaboradores, mostrarCursosDirectivos} = require("../../controllers/curso/curso.controller")
 
@@ -10,7 +9,7 @@ cursoRouter.get("/readAll", [], mostrarCurso);
 cursoRouter.get("/search/:nombre", [], buscarCursoNombre);
 cursoRouter.get("/colaboradores", [], mostrarCursosColaboradores);
 cursoRouter.get("/directivos", [], mostrarCursosDirectivos );
-cursoRouter.post("/create", [validateCursoFields], crearCurso);
+cursoRouter.post("/create", [], crearCurso);
 cursoRouter.delete("/delete/:id", [], eliminarCurso);
 cursoRouter.put("/update/:id", [], actualizarCurso);
 
